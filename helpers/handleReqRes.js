@@ -12,6 +12,7 @@ const routes = require("../routes");
 const {
   notFoundHandler,
 } = require("../handlers/routesHandlers/notFoundHandler");
+const path = require("path");
 
 // app object - module scaffolding
 const handler = {};
@@ -20,45 +21,57 @@ const handler = {};
 
 // methods
 handler.handleRequest = (req, res) => {
+  // part 1
   const parsedUrl = url.parse(req.url, true);
-  const path = parsedUrl.pathname;
-  const trimmedPath = path.replace(/^\/+|\/$/g, "");
+  const pathname = parsedUrl.pathname;
+  const trimmedPath = pathname.replace(/^\/+|\/$/g, "");
   const method = req.method.toLowerCase();
   const queryObject = parsedUrl.query;
   const headersObject = req.headers;
 
+  // part 2
+
   const requestProps = {
     parsedUrl,
-    path,
+    pathname,
     trimmedPath,
     method,
     queryObject,
     headersObject,
   };
 
+  // part 3
+
   const decoder = new StringDecoder("utf-8");
   let realData = "";
 
-  const chosenHandler = routes[trimmedPath]
+  // part 4
+
+  const chosenRoute = routes[trimmedPath]
     ? routes[trimmedPath]
     : notFoundHandler;
 
-  chosenHandler(requestProps, (status, payload) => {
-    (status = typeof status === "number" ? status : 500),
-      (payload = typeof payload === "object" ? payload : {});
-    const payloadString = JSON.stringify(payload);
+  // part 5
+
+  chosenRoute(requestProps, (status, payload) => {
+    status = typeof status === "number" ? status : 505;
+    payload = typeof payload === "object" ? payload : {};
+    const stringPayload = JSON.stringify(payload);
     res.writeHead(status);
-    res.end(payloadString);
+    res.end(stringPayload);
   });
+
+  // part 6
 
   req.on("data", (buffer) => {
     realData += decoder.write(buffer);
   });
 
+  //part 7
+
   req.on("end", () => {
     realData += decoder.end();
-    console.log(realData);
-    res.end("server  is always running");
+    res.end("server is ending");
   });
 };
 

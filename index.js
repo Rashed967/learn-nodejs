@@ -14,29 +14,21 @@ const app = {};
 
 // config
 app.config = {
-  port: 3000,
-};
-
+  port : 3000,
+}
 /*
 create server 
 server listening
 */
 
 // create server
-app.createServer = () => {
-  const server = http.createServer(app.handleRequest);
-  server.listen(app.config.port, () => {
-    console.log(`sever is listening on port ${app.config.port}`);
-  });
-};
 
-/*
-url
-path
-remove slashes from path
-query object string
-headers object
-*/
+app.createServer = () =>{
+  const server = http.createServer(app.handleRequest)
+  server.listen(app.config.port, () =>{
+    console.log(`serve is listing on port ${app.config.port}`)
+  })
+}
 
 // handle req res
 app.handleRequest = handler.handleRequest;

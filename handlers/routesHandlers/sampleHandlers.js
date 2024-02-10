@@ -6,20 +6,15 @@
 */
 
 // modue scaffolding
-const handler = {}
+const handler = {};
 
-// methods and functions
-handler.sampleHandler = (requestProps, callback) =>{
-    callback(200, {
-        message: "this is sample route"
-    })
-}
+// methods and function
 
-handler.aboutHandler = (requestProps, callback)=>{
-    callback(200, {
-        message: "this is about route"
-    })
-}
+handler.sampleHandler = (requestProps, callback) => {
+  callback(200, {
+    message: "This is sample route",
+  });
+};
 
 // export module
-module.exports = handler
+module.exports = handler;
