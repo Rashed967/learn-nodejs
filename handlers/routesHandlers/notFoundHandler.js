@@ -1,19 +1,19 @@
 /*
     title : not found handler title
-    descriptio : 404 not found handler title
+    descriptio : 404 not found handler descriptions
     author: rashed hasan
     date: 10/2/2024
 */
 
-// modue scaffolding
+// module scaffolding
 const handler = {};
 
-// methods and functions
+// functions and methods
 handler.notFoundHandler = (requestProps, callback) => {
   callback(404, {
-    message: "this is not found handler",
+    message: "404 Error, Not found",
   });
 };
 
 // export module
-module.exports = handler;
+module.exports = handler

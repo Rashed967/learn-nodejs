@@ -33,23 +33,23 @@ handler.handleRequest = (req, res) => {
     trimmedPath,
     method,
     queryObject,
-    headersObject
-  }
-
+    headersObject,
+  };
 
   const decoder = new StringDecoder("utf-8");
   let realData = "";
 
+  const chosenHandler = routes[trimmedPath]
+    ? routes[trimmedPath]
+    : notFoundHandler;
 
-  const chosenHandler = routes[trimmedPath] ? routes[trimmedPath] : notFoundHandler
-
-  chosenHandler(requestProps, (status, payload) =>{
-    status = typeof(status) === 'number' ? status : 500,
-    payload = typeof(payload) === 'object'? payload : {}
-    const payloadString = JSON.stringify(payload)
-    res.writeHead(status)
-    res.end(payloadString)
-  })
+  chosenHandler(requestProps, (status, payload) => {
+    (status = typeof status === "number" ? status : 500),
+      (payload = typeof payload === "object" ? payload : {});
+    const payloadString = JSON.stringify(payload);
+    res.writeHead(status);
+    res.end(payloadString);
+  });
 
   req.on("data", (buffer) => {
     realData += decoder.write(buffer);
