@@ -53,14 +53,6 @@ handler.handleRequest = (req, res) => {
 
   // part 5
 
-  chosenRoute(requestProps, (status, payload) => {
-    status = typeof status === "number" ? status : 505;
-    payload = typeof payload === "object" ? payload : {};
-    const stringPayload = JSON.stringify(payload);
-    res.writeHead(status);
-    res.end(stringPayload);
-  });
-
   // part 6
 
   req.on("data", (buffer) => {
@@ -71,6 +63,13 @@ handler.handleRequest = (req, res) => {
 
   req.on("end", () => {
     realData += decoder.end();
+    chosenRoute(requestProps, (status, payload) => {
+      status = typeof status === "number" ? status : 505;
+      payload = typeof payload === "object" ? payload : {};
+      const stringPayload = JSON.stringify(payload);
+      res.writeHead(status);
+      res.end(stringPayload);
+    });
     res.end("server is ending");
   });
 };
