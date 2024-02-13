@@ -67,10 +67,10 @@ handler.handleRequest = (req, res) => {
       status = typeof status === "number" ? status : 505;
       payload = typeof payload === "object" ? payload : {};
       const stringPayload = JSON.stringify(payload);
+      res.setHeader('Content-Type', 'application/json')
       res.writeHead(status);
       res.end(stringPayload);
     });
-    res.end("server is ending");
   });
 };
 

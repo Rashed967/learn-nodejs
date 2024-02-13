@@ -11,25 +11,25 @@ const handler = require("./helpers/handleReqRes");
 const environment = require("./helpers/environments.");
 const lib = require("./lib/data");
 
-// testing file to write
-// lib.create("test", "file1", {name: 'rashed', XP: 1337}, (err)=>{
-//   console.log(err)
-// })
+// // testing file to write
+// lib.create("newDir", "file2", { name: "rashed", age: 26 }, (message) => {
+//   console.log(message);
+// });
 
-// read file
-// lib.read('test', 'file1', (err, data) =>{
+//read data
+// lib.read('newDir', 'file3', (err, data)=>{
 //   console.log(err, data)
 // })
 
-// update file
-// lib.update('test', 'file1', {name : "portugal", player: "CR7", age : 37}, (err)=>{
-//   console.log(err)
-// })
+// // update data
+// lib.update("newDir", "file2", { name: "nasir uddin", age: 35 }, (message) => {
+//   console.log(message);
+// });
 
-// delete file
-lib.delete("test", "file1", (message) => {
-  console.log(message);
-});
+// // delete the file
+// lib.delete("test", "newFile", (message) => {
+//   console.log(message);
+// });
 
 // app - scaffoold object
 const app = {};
